@@ -1,2 +1,635 @@
-# aion2
-aion2
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>아이온2 유치원 길드 소개</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f3b6d 0, #050816 55%, #02040a 100%);
+      color: #f5f7ff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* 상단 네비게이션 */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(3, 8, 20, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.8rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #7cecff, #3b82f6 40%, #0f172a 75%);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      opacity: 0.86;
+      position: relative;
+      padding-bottom: 0.1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* 전체 컨테이너 */
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+
+    /* 히어로 섹션 */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(120deg, #38bdf8, #a855f7, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.28rem 0.8rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.65), rgba(15,23,42,0.8));
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1.3rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-tag {
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15,23,42,0.65);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+
+    .btn-primary, .btn-outline {
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.86rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease,
+                  border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #38bdf8, #6366f1);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+      color: #0b1120;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(59, 130, 246, 0.45);
+    }
+
+    .btn-outline {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-card {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 50px rgba(56, 189, 248, 0.18);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      max-height: 320px;
+    }
+
+    .hero-card-footer {
+      padding: 0.9rem 1rem 1rem;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(15,23,42,0.9), rgba(30,64,175,0.9));
+    }
+
+    .hero-card-footer strong {
+      font-size: 0.86rem;
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      right: 6%;
+      top: -10%;
+      padding: 0.6rem 0.9rem;
+      border-radius: 0.8rem;
+      font-size: 0.75rem;
+      background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(244,114,182,0.08));
+      border: 1px solid rgba(248, 250, 252, 0.35);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 공통 카드 레이아웃 */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section-title span.badge {
+      font-size: 0.7rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.78;
+    }
+
+    .section-description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.6), rgba(15,23,42,0.96));
+      border-radius: 1.1rem;
+      padding: 0.95rem 1rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.95);
+      font-size: 0.86rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 50%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      opacity: 0.88;
+    }
+
+    .card ul {
+      margin-top: 0.45rem;
+      list-style: none;
+    }
+
+    .card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.3rem;
+      margin-top: 0.25rem;
+      opacity: 0.9;
+    }
+
+    .card ul li span.dot {
+      font-size: 0.75rem;
+      margin-top: 0.15rem;
+    }
+
+    /* 규칙 섹션 */
+    .rules {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    .rules-list {
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.16), rgba(15,23,42,0.96));
+      border-radius: 1.1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      font-size: 0.9rem;
+    }
+
+    .rules-list ol {
+      margin-left: 1.1rem;
+      margin-top: 0.3rem;
+    }
+
+    .rules-list li {
+      margin: 0.25rem 0;
+    }
+
+    .rules-tip {
+      font-size: 0.82rem;
+      opacity: 0.85;
+      margin-top: 0.7rem;
+    }
+
+    .rules-side {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .rules-side-card {
+      padding: 0.8rem 0.9rem;
+      border-radius: 0.9rem;
+      font-size: 0.82rem;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(15,23,42,0.85);
+    }
+
+    /* 추가 이미지 갤러리 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15,23,42,0.9);
+      box-shadow: 0 15px 30px rgba(15,23,42,0.95);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      padding: 0.45rem 0.6rem 0.6rem;
+      font-size: 0.78rem;
+      opacity: 0.85;
+    }
+
+    /* 하단 푸터 */
+    footer {
+      border-top: 1px solid rgba(15,23,42,1);
+      background: radial-gradient(circle at top, rgba(30,64,175,0.4), rgba(3,7,18,1));
+      padding: 1.4rem 1.25rem 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      opacity: 0.86;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image {
+        order: -1;
+      }
+      .card-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .rules {
+        grid-template-columns: 1fr;
+      }
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+      .card-row {
+        grid-template-columns: 1fr;
+      }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .hero-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비 -->
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-badge">👶</div>
+        <div>
+          <div>유치원</div>
+          <div style="font-size:0.7rem; opacity:0.8;">AION2 GUILD</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">길드 소개</a>
+        <a href="#features">길드 특징</a>
+        <a href="#rules">규칙</a>
+        <a href="#recruit">가입 안내</a>
+        <a href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- 히어로 섹션 -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <div class="hero-pill">
+          🌈 캐주얼 친목 · 힐링 길드
+          <span style="opacity:0.8;">아이온2 서버 내 활동</span>
+        </div>
+        <h1>
+          <span>유치원</span> 길드에<br />오신 것을 환영합니다
+        </h1>
+        <p class="hero-subtitle">
+          빡-공이 아니라, 퇴근 후 편하게 들어와 떠들고 놀다가 가는
+          <strong>아이온2 힐링 놀이터</strong>를 지향합니다.<br />
+          레이드, 필드, 생활 컨텐츠까지
+          <strong>“같이 하면 재밌는 건 다 하는”</strong> 유치원이에요.
+        </p>
+
+        <div class="hero-tags">
+          <div class="hero-tag">🍼 신규/복귀 환영</div>
+          <div class="hero-tag">😆 음성 강요 없음</div>
+          <div class="hero-tag">🌙 야간/직장인 친화</div>
+          <div class="hero-tag">🤝 매너·존중 최우선</div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('recruit').scrollIntoView({behavior:'smooth'})">
+            ✨ 지금 가입 문의하기
+          </button>
+          <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+            👀 길드 분위기 먼저 보기
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="hero-card">
+          <!-- 메인 아이온2 스크린샷 -->
+          <!-- TODO: 여기 src 를 실제 아이온2 스크린샷 파일 경로로 교체하세요 -->
+          <img src="images/aion2-hero.jpg" alt="아이온2 유치원 길드 메인 이미지" />
+          <div class="hero-card-footer">
+            <div>
+              <strong>유치원 · AION2</strong><br />
+              오늘도 출석 체크하고, 소소하게 성장하는 우리 반 ✨
+            </div>
+            <div style="font-size:0.78rem; text-align:right;">
+              접속 시간대 : 평일 저녁 / 주말 상시<br />
+              목표 : 즐겜 · 친목 · 가벼운 도전
+            </div>
+          </div>
+        </div>
+        <div class="hero-floating-badge">
+          🧸 <strong>길드 키워드</strong><br />
+          편안함 · 느긋함 · 배려 · 소통
+        </div>
+      </div>
+    </section>
+
+    <!-- 길드 소개 -->
+    <section id="about">
+      <h2 class="section-title">
+        길드 소개
+        <span class="badge">about</span>
+      </h2>
+      <p class="section-description">
+        <strong>“유치원”</strong>은 이름처럼 부담 없이 들어와서 떠들고 놀다 가는,
+        <strong>캐주얼 친목 길드</strong>입니다.  
+        스펙·템렙보다는 <strong>매너와 말투, 같이 있을 때 편한 사람인지</strong>를
+        가장 중요하게 생각해요.
+      </p>
+
+      <div class="card-row" id="features">
+        <article class="card">
+          <h3>🎈 편한 분위기의 친목 길드</h3>
+          <p>
+            출석 강요, 과한 숙제 없습니다. 접속할 때 즐겁고,
+            안 들어올 때도 눈치 보이지 않는 길드를 만들고 있어요.
+          </p>
+          <ul>
+            <li><span class="dot">•</span> 채팅 위주 소통, 음성은 선택</li>
+            <li><span class="dot">•</span> 눈치 없는 강요 / 템 압박 No</li>
+            <li><span class="dot">•</span> 잡담 & 게임 얘기 환영</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>🪂 컨텐츠는 “같이 재미있게”</h3>
+          <p>
+            공략도 좋지만, <strong>먼저 웃는 게 1순위</strong>인 길드입니다.
+            컨텐츠는 천천히 익히면서 같이 성장해요.
+          </p>
+          <ul>
+            <li><span class="dot">•</span> 파티 사냥 / 필드 보스 / 던전</li>
+            <li><span class="dot">•</span> 초보 공략 같이 봐가며 도전</li>
+            <li><span class="dot">•</span> “모르면 물어보면 됨” 문화</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>🌙 직장인 & 라이트 유저 친화</h3>
+          <p>
+            대부분 <strong>직장인 / 학생</strong>이라  
+            <strong>저녁 · 주말 위주</strong>로 천천히 플레이합니다.
+          </p>
+          <ul>
+            <li><span class="dot">•</span> 실생활 우선, 게임은 그 다음</li>
+            <li><span class="dot">•</span> 잠수 / 접속 텀 이해해요</li>
+            <li><span class="dot">•</span> 잠깐 와서 수다만 쳐도 OK</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 규칙 & 운영 -->
+    <section id="rules">
+      <h2 class="section-title">
+        길드 규칙 & 운영 방식
+        <span class="badge">rules</span>
+      </h2>
+      <p class="section-description">
+        유치원 규칙은 복잡하지 않지만, <strong>서로가 편하려면 꼭 필요한 최소한</strong>만
+        정해두었습니다.
+      </p>
+
+      <div class="rules">
+        <div class="rules-list">
+          <strong>기본 규칙</strong>
+          <ol>
+            <li>기본적인 예의 / 존댓말 사용 (친해지면 말 놓기도 가능)</li>
+            <li>욕설, 비하, 정치/종교/선 넘는 드립 금지</li>
+            <li>길드원 간의 장사/거래는 투명하게</li>
+            <li>장기 미접속 예정이면 한 마디만 남겨주기</li>
+            <li>길드 분쟁은 귓말이 아니라 길마/부길마에게 먼저 이야기</li>
+          </ol>
+          <div class="rules-tip">
+            💡 규칙은 “잡기 위해서”가 아니라,
+            <strong>우리가 오래 편하게 놀려고 있는 약속</strong>이에요.
+          </div>
+        </div>
+
+        <div class="rules-side">
+          <div class="rules-side-card">
+            <strong>길드 활동 예시</strong><br />
+            · 평일 : 출석 체크 & 가벼운 파티 사냥<br />
+            · 주말 : 던전 / 필드보스 / 이벤트 컨텐츠<br />
+            · 수다 채널 : 게임 얘기부터 일상까지 아무 말 환영
+          </div>
+          <div class="rules-side-card">
+            <strong>제재 기준</strong><br />
+            · 경고 이후에도 반복되는 매너 위반<br />
+            · 다른 길드원에게 스트레스를 주는 언행<br />
+            → 상호 존중이 깨지는 상황이면 조용히 정리될 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <
